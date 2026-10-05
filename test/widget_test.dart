@@ -29,8 +29,10 @@ void main() {
     // Verify home screen blueprint elements
     expect(find.text('Muneeb Ur Rehman'), findsWidgets);
     expect(find.text('Explore your finances'), findsOneWidget);
-    expect(find.text('Bills & Receipts'), findsOneWidget);
+    expect(find.text('Bills'), findsWidgets);
+    expect(find.text('Billing'), findsOneWidget);
     expect(find.text('Subscriptions'), findsOneWidget);
+    expect(find.text('Transactions'), findsWidgets);
     expect(find.text('Ask AI Assistant'), findsOneWidget);
   });
 }
