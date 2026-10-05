@@ -1,30 +1,36 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:ai_gallery/main.dart';
+import 'package:ai_gallery/app/app.dart';
+import 'package:ai_gallery/features/auth/data/supabase_auth_repository.dart';
+import 'package:ai_gallery/features/home/data/mock_dashboard_repository.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('GalleryFinanceApp smoke test loads blueprint home screen', (
+    WidgetTester tester,
+  ) async {
+    final authRepository = SupabaseAuthRepository();
+    const dashboardRepository = MockDashboardRepository();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    await tester.pumpWidget(
+      GalleryFinanceApp(
+        authRepository: authRepository,
+        dashboardRepository: dashboardRepository,
+      ),
+    );
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    // Let the initial frame and routing settle
+    await tester.pumpAndSettle();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Verify counter is not present (old demo removed)
+    expect(
+      find.text('You have pushed the button this many times:'),
+      findsNothing,
+    );
+
+    // Verify home screen blueprint elements
+    expect(find.text('Muneeb Ur Rehman'), findsWidgets);
+    expect(find.text('Explore your finances'), findsOneWidget);
+    expect(find.text('Bills & Receipts'), findsOneWidget);
+    expect(find.text('Subscriptions'), findsOneWidget);
+    expect(find.text('Ask AI Assistant'), findsOneWidget);
   });
 }
