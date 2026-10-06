@@ -25,4 +25,9 @@ abstract final class AppShadows {
   static const List<BoxShadow> bottomNav = [
     BoxShadow(color: Color(0x08101828), blurRadius: 16, offset: Offset(0, -4)),
   ];
+
+  /// Floating dock navigation shadow (0px 12px 32px rgba(0,0,0,0.08)).
+  static const List<BoxShadow> floatingNav = [
+    BoxShadow(color: Color(0x14101828), blurRadius: 32, offset: Offset(0, 12)),
+  ];
 }

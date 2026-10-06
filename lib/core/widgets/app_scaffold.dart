@@ -14,7 +14,7 @@ class AppScaffold extends StatelessWidget {
     this.appBar,
     this.bottomNavigationBar,
     this.floatingActionButton,
-    this.backgroundColor = AppColors.background,
+    this.backgroundColor = const Color.fromRGBO(247, 247, 247, 1),
     this.showBlueprintBanner = false,
     this.padding,
     this.useSafeArea = true,
@@ -37,7 +37,7 @@ class AppScaffold extends StatelessWidget {
       content = Padding(padding: padding!, child: content);
     }
 
-    if (showBlueprintBanner) {
+    if (showBlueprintBanner && AppConstants.showBlueprint) {
       content = Column(
         children: [
           Container(

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../app/router/route_names.dart';
 import '../../../../app/theme/app_spacing.dart';
+import '../../../../core/utils/responsive.dart';
 import '../../../../core/widgets/app_error_state.dart';
 import '../../../../core/widgets/app_loading_state.dart';
 import '../../../../core/widgets/app_scaffold.dart';
@@ -27,7 +28,7 @@ class HomeScreen extends StatelessWidget {
         if (state is DashboardInitial) {
           context.read<DashboardCubit>().loadDashboard();
           return const AppScaffold(
-            showBlueprintBanner: true,
+            showBlueprintBanner: false,
             body: AppLoadingState(
               message: 'Loading your financial blueprint...',
             ),
@@ -36,14 +37,14 @@ class HomeScreen extends StatelessWidget {
 
         if (state is DashboardLoading) {
           return const AppScaffold(
-            showBlueprintBanner: true,
+            showBlueprintBanner: false,
             body: AppLoadingState(message: 'Loading financial summary...'),
           );
         }
 
         if (state is DashboardError) {
           return AppScaffold(
-            showBlueprintBanner: true,
+            showBlueprintBanner: false,
             body: AppErrorState(
               message: state.message,
               onRetry: () => context.read<DashboardCubit>().refresh(),
@@ -55,12 +56,17 @@ class HomeScreen extends StatelessWidget {
           final summary = state.summary;
 
           return AppScaffold(
-            showBlueprintBanner: true,
+            showBlueprintBanner: false,
             body: RefreshIndicator(
               onRefresh: () => context.read<DashboardCubit>().refresh(),
               child: SingleChildScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
-                padding: AppSpacing.screenPadding,
+                padding: EdgeInsets.only(
+                  left: AppSpacing.screenMargin,
+                  right: AppSpacing.screenMargin,
+                  top: AppSpacing.lg,
+                  bottom: Responsive.spacing(context, 110, min: 95, max: 130),
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [

@@ -67,6 +67,7 @@ GoRouter createRouter(AuthBloc authBloc) {
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return Scaffold(
+            extendBody: true,
             body: navigationShell,
             bottomNavigationBar: AppBottomNavigation(
               currentIndex: navigationShell.currentIndex,

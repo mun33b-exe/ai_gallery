@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../app/router/route_names.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_icons.dart';
 import '../../../../app/theme/app_radii.dart';
@@ -34,9 +36,27 @@ class SubscriptionsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+
     return AppScaffold(
-      showBlueprintBanner: true,
-      appBar: AppBar(title: const Text('Subscriptions')),
+      showBlueprintBanner: false,
+      appBar: AppBar(
+        centerTitle: isIOS,
+        title: const Text('Subscriptions'),
+        leading: IconButton(
+          icon: Icon(
+            isIOS ? Icons.arrow_back_ios_new_rounded : Icons.arrow_back_rounded,
+          ),
+          tooltip: 'Back',
+          onPressed: () {
+            if (context.canPop()) {
+              context.pop();
+            } else {
+              context.go(RouteNames.home);
+            }
+          },
+        ),
+      ),
       body: ListView(
         padding: AppSpacing.screenPadding,
         children: [

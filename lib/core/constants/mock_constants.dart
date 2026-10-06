@@ -6,9 +6,9 @@ abstract final class MockConstants {
   static const String mockPeriodLabel = 'This month';
   static const String mockDataFreshness =
       'Updated today · 126 records from 20 images';
-  static const int mockReviewNeededCount = 2;
+  static const int mockReviewNeededCount = 0;
   static const String mockReviewNeededText =
-      '2 receipts need review before reconciliation';
+      '0 receipts need review before reconciliation';
   static const String mockDemoEmail = 'muneeb@example.com';
   static const String mockDemoPassword = 'demoPassword123';
 }
